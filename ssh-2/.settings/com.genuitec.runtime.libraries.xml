@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project>
+  <add-on id="spring.web"/>
+  <disabled-container path="com.genuitec.runtime.library/com.genuitec.hibernate_4.1"/>
+  <container path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v8.0">
+    <jar-attrs id="lib//catalina.jar">
+      <attribute name="javadoc_location"/>
+      <attribute name="source-path-root"/>
+      <attribute name="source-path" value="/Users/xufeng/work/material/apache-tomcat-8.0.32-src/java/org/apache/catalina"/>
+    </jar-attrs>
+  </container>
+</project>

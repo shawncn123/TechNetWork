@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+    <class name="com.shenxf.ssh.entities.Employee" table="SSH_EMPLOYEE">
+        <id name="id" type="java.lang.Integer">
+        	<column name="ID"></column>
+            <generator class="native" />
+        </id>
+        <property name="lastName" type="java.lang.String">
+        	<column name="LAST_NAME"></column>
+        </property>
+        <property name="email" type="java.lang.String">
+        	<column name="EMAIL"></column>
+        </property>
+        <property name="birth" type="java.util.Date">
+        	<column name="BIRTH"></column>
+        </property>
+        <property name="createTime" type="java.util.Date">
+        	<column name="CREATE_TIME"></column>
+        </property>
+        <!-- 映射单向 n-1 的关联关系 -->
+		<many-to-one name="department" class="com.shenxf.ssh.entities.Department">
+			<column name="DEPARTMENT_ID"></column>
+		</many-to-one>
+        <!-- 懒加载 效率低 不推荐使用
+		<many-to-one name="department" class="com.shenxf.ssh.entities.Department" lazy="false">
+			<column name="DEPARTMENT_ID"></column>
+		</many-to-one> -->
+    </class>
+
+</hibernate-mapping>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+
+	<package name="default" namespace="/" extends="struts-default">
+
+		<!-- 定义新的拦截器栈，配置prepare 拦截器的参数alwaysInvokePrepare 参数值为false -->
+		<interceptors>
+			<interceptor-stack name="sshStack">
+				<interceptor-ref name="paramsPrepareParamsStack">
+					<param name="prepare.alwaysInvokePrepare">false</param>
+				</interceptor-ref>
+				
+				<interceptor-ref name="fileUpload">
+				<!--maximumSize (可选) - 这个拦截器允许的上传到action中的文件最大长度(以byte为单位). 注意这个参数和在webwork.properties中定义的属性没有关系,默认2MB -->
+				<param name="maximumSize">409600</param>
+				<!--allowedTypes (可选) - 以逗号分割的contentType类型列表(例如text/html), 这些列表是这个拦截器允许的可以传到action中的contentType.如果没有指定就是允许任何上传类型. -->
+				<param name="allowedTypes">text/plain</param>
+				
+			</interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+
+		<!-- 使用新的拦截器栈 -->
+		<default-interceptor-ref name="sshStack"></default-interceptor-ref>
+
+		<action name="emp-*" class="employeeAction" method="{1}">
+			<result name="list">/views/emp-list.jsp</result>
+			<result type="stream" name="ajax-success">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+			<result name="input">/views/emp-input.jsp</result>
+			<!-- <result name="success" type="redirect">/emp-list</result> -->
+		</action>
+		<action name="operfile" class="operFile" method="OperationFile">
+			<result name="success">/views/emp-input.jsp</result>
+		</action>
+
+		<action name="upload" class="operFile" method="uploadFile">
+			<result name="success">/views/upfileResult.jsp</result>
+		<!-- 	<interceptor-ref name="fileUpload">
+				maximumSize (可选) - 这个拦截器允许的上传到action中的文件最大长度(以byte为单位). 注意这个参数和在webwork.properties中定义的属性没有关系,默认2MB
+				<param name="maximumSize">409600</param>
+				allowedTypes (可选) - 以逗号分割的contentType类型列表(例如text/html), 这些列表是这个拦截器允许的可以传到action中的contentType.如果没有指定就是允许任何上传类型.
+				<param name="allowedTypes">text/plain</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref> -->
+		</action>
+		<action name="listfile" class="operFile" method="listFile">
+			<result name="success">/views/listFile.jsp</result>
+		</action>
+
+		<action name="filedownload" class="operFile" method="downloadFile">
+			<result name="success" type="stream">
+				<!--指定文件下载类型 application/octet-stream默认值可以下载所有类型 -->
+				<param name="contentType">
+					application/txt;
+				</param>
+				<!-- 指定下载的文件名和显示方式 ，但注意中文名的乱码问题，解决办法是：进行编码处理 -->
+				<!--contentDisposition是文件下载的处理方式，包括内联(inline)和附件(attachment)， 默认是inline, 
+					使用附件时这样配置：attachment;filename="文件名" 。 -->
+				<param name="contentDisposition">
+					attachment;filename="${encodFile}"
+				</param>
+				<!--由getDownloadFile()方法获得inputStream -->
+				<param name="inputName">inputStream</param>
+				<!-- 指定下载文件的缓存大小 -->
+				<param name="bufferSize">2048</param>
+			</result>
+		</action>
+		<!-- <result name="success" type="redirect">/emp-list</result> 用ajax后注释掉 -->
+
+	</package>
+
+</struts>

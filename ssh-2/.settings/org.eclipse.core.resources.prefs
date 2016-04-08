@@ -1,0 +1,8 @@
+eclipse.preferences.version=1
+encoding//WebRoot/index.jsp=UTF-8
+encoding//src/com/shenxf/ssh/actions/EmployeeAction.java=UTF-8
+encoding//src/com/shenxf/ssh/dao/EmployeeDao.java=UTF-8
+encoding//src/com/shenxf/ssh/entities/Employee.java=UTF-8
+encoding//src/com/shenxf/ssh/service/EmployeeService.java=UTF-8
+encoding//src/com/shenxf/ssh/service/ImportDataFromCsv.java=UTF-8
+encoding//src/com/shenxf/ssh/service/OperationExcelForPOI.java=UTF-8

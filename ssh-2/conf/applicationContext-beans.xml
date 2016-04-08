@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<bean id="employeeDao" class="com.shenxf.ssh.dao.EmployeeDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="departmentDao" class="com.shenxf.ssh.dao.DepartmentDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="employeeService" class="com.shenxf.ssh.service.EmployeeService">
+		<property name="employeeDao" ref="employeeDao"></property>
+	</bean>
+	
+	<bean id="departmentService" class="com.shenxf.ssh.service.DepartmentService">
+		<property name="departmentDao" ref="departmentDao"></property>
+	</bean>
+	
+	<bean id="employeeAction" class="com.shenxf.ssh.actions.EmployeeAction" 
+		scope="prototype">
+		<property name="employeeService" ref="employeeService"></property>	
+		<property name="departmentService" ref="departmentService"></property>
+	</bean>
+	
+	<bean id="operationExcelForPOI" class="com.shenxf.ssh.service.OperationExcelForPOI">
+	</bean>
+	<bean id="fileOperationService" class="com.shenxf.ssh.service.FileOperationService">
+	</bean>
+	
+	<bean id="operFile" class="com.shenxf.ssh.actions.OperationExcelAction" 
+		scope="prototype">
+		<property name="operationExcelForPOI" ref="operationExcelForPOI"></property>	
+		<property name="fileOperationService" ref="fileOperationService"></property>	
+	</bean>
+	
+	
+</beans>

@@ -1,0 +1,16 @@
+#MyEclipse Hibernate Properties
+#Mon Feb 29 10:23:48 CST 2016
+genVersionTag=false
+genAnnotations=false
+configFile=/ssh-2/conf/hibernate.cfg.xml
+reStrategyClass=
+sessionFactoryId=
+profile=
+detectM2M=false
+genBasicCompId=false
+keyGenerator=
+createConfigFile=true
+basePersistenceClass=
+detectO2O=false
+useJavaTypes=true
+reSettingsFile=
